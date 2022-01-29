@@ -1,12 +1,9 @@
 package main
 
 import (
-	"bytes"
 	"fmt"
-	"io"
 	"io/ioutil"
 	"log"
-	"net/http"
 	"os"
 	"path/filepath"
 	"sort"
@@ -27,6 +24,37 @@ func CreateStorage() *Storage {
 		m:    &sync.Mutex{},
 		root: root,
 	}
+}
+
+func IsDecimalPalindromeNumber(n int) bool {
+	if n < 0 {
+		n = -n
+	}
+	s := strconv.Itoa(n)
+	bound := (len(s) / 2) + 1
+	for i := 0; i < bound; i++ {
+		if s[i] != s[len(s)-1-i] {
+			return false
+		}
+	}
+	return true
+}
+
+func isPolindrome(x int) bool {
+	if x < 0 {
+		x = -x
+	}
+	s := strconv.Itoa(x)
+	rev := []rune(s)
+	for i, j := 0, len(rev)-1; i < len(rev)/2; i, j = i+1, j-1 {
+		rev[i], rev[j] = rev[j], rev[i]
+	}
+	intstr, _ := strconv.Atoi(string(rev))
+
+	return x == intstr
+
+	// bound := (len(s) / 2) + 1
+	// fmt.Println(bound)
 }
 
 func Reverse(s string) string {
@@ -194,25 +222,27 @@ func StringMerge(str string) string {
 }
 
 func main() {
-	data, err := os.ReadFile("./image.png")
-	if err != nil {
-		fmt.Println(err)
-	}
-	// fmt.Println(data)
+	isPolindrome(123)
+	///==========BYTE request
+	// data, err := os.ReadFile("./image.png")
+	// if err != nil {
+	// 	fmt.Println(err)
+	// }
+	// // fmt.Println(data)
 
-	req, err := http.NewRequest("POST", "http://localhost:7360", bytes.NewBuffer(data))
-	if err != nil {
-		fmt.Println(err)
-	}
-	client := &http.Client{}
-	resp, err := client.Do(req)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-	defer resp.Body.Close()
-	io.Copy(os.Stdout, resp.Body)
-
+	// req, err := http.NewRequest("POST", "http://localhost:7360", bytes.NewBuffer(data))
+	// if err != nil {
+	// 	fmt.Println(err)
+	// }
+	// client := &http.Client{}
+	// resp, err := client.Do(req)
+	// if err != nil {
+	// 	fmt.Println(err)
+	// 	return
+	// }
+	// defer resp.Body.Close()
+	// io.Copy(os.Stdout, resp.Body)
+	//====================
 	// do not modify below here, readline is our function
 	// that properly reads in the input for you
 
