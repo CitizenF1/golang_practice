@@ -7,6 +7,20 @@ import (
 	"strings"
 )
 
+func maximumWealth(accounts [][]int) int {
+	var resul int
+	for _, v := range accounts {
+		tmp := 0
+		for _, e := range v {
+			tmp += e
+			if resul > tmp {
+				resul = tmp
+			}
+		}
+	}
+	return resul
+}
+
 //ZigZog Convert
 func ZigZagConvert(s string, numRows int) string {
 	if numRows == 1 {
