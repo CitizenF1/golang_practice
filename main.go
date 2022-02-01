@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
@@ -24,6 +25,8 @@ func CreateStorage() *Storage {
 }
 
 func main() {
+	fmt.Println(lengthOfLastWord("luffy is still joyboy"))
+	// fmt.Println(romanToInt("MCMXCIV"))
 	// fmt.Println(ZigZagConvert("PAYPALISHIRING", 4))
 	// isPolindrome(123)
 	///==========BYTE request
