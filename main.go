@@ -25,10 +25,11 @@ func CreateStorage() *Storage {
 }
 
 func main() {
-	fmt.Println(lengthOfLastWord("luffy is still joyboy"))
-	// fmt.Println(romanToInt("MCMXCIV"))
-	// fmt.Println(ZigZagConvert("PAYPALISHIRING", 4))
-	// isPolindrome(123)
+	nums1 := [4]int{1, 2, 3, 4}
+	nums := [10]int{1, 1, 1, 3, 3, 4, 3, 2, 4, 2}
+	fmt.Println(containsDuplicate(nums[:]))
+	fmt.Println(containsDuplicate(nums1[:]))
+
 	///==========BYTE request
 	// data, err := os.ReadFile("./image.png")
 	// if err != nil {

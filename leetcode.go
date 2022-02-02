@@ -22,6 +22,38 @@ func romanToInt(s string) int {
 	return result
 }
 
+//Definition for singly-linked list.
+type ListNode struct {
+	Val  int
+	Next *ListNode
+}
+
+func containsDuplicate(nums []int) bool {
+	fmt.Println(nums)
+	sort.Ints(nums)
+	fmt.Println(nums, "after")
+
+	for i := 0; i < len(nums)-1; i++ {
+		if nums[i] == nums[i+1] {
+			fmt.Println(nums[i+1], "i+1", nums[i])
+			return true
+		}
+	}
+	return false
+}
+
+func mergeTwoLists(list1 *ListNode, list2 *ListNode) *ListNode {
+	resultlist := ListNode{}
+
+	// for _, v := range list1 {
+	// 	for _, v := range list2 {
+
+	// 	}
+	// }
+
+	return &resultlist
+}
+
 func lengthOfLastWord(s string) int {
 	length := 0
 
