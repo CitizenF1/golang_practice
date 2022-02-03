@@ -4,10 +4,12 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
+	"math/rand"
 	"os"
 	"path/filepath"
 	"strconv"
 	"sync"
+	"time"
 )
 
 type Storage struct {
@@ -24,12 +26,61 @@ func CreateStorage() *Storage {
 	}
 }
 
-func main() {
-	nums1 := [4]int{1, 2, 3, 4}
-	nums := [10]int{1, 1, 1, 3, 3, 4, 3, 2, 4, 2}
-	fmt.Println(containsDuplicate(nums[:]))
-	fmt.Println(containsDuplicate(nums1[:]))
+// range specification, note that min <= max
+type IntRange struct {
+	min, max int
+}
 
+// get next random value within the interval including min and max
+func (ir *IntRange) NextRandom(r *rand.Rand) int {
+	return r.Intn(ir.max-ir.min+1) + ir.min
+}
+
+func RangeInt(n int) []string {
+	var arr []string
+	stiker := []string{
+		"22",
+		"11",
+		"33",
+		"44",
+		"55",
+		"66",
+		"32",
+		"56",
+		"77",
+		"88",
+		"99",
+		"10",
+	}
+
+	var r int
+	for r = 0; r <= n-1; r++ {
+		// arr[r] = rand.Intn(max) + min
+		arr = append(arr, stiker[rand.Intn(len(stiker))])
+	}
+	return arr
+}
+
+// rand.Seed(time.Now().UnixNano())
+// min := 5
+// max := 20
+// fmt.Println(rand.Intn(max-min) + min)
+
+func main() {
+	rand.Seed(time.Now().UnixNano())
+
+	fmt.Println(RangeInt(4))
+	//////////////////////////////////
+	// r := rand.New(rand.NewSource(4))
+	// ir := IntRange{1, 20}
+	// min := 5
+	// max := 20
+	// for i := 0; i < 4; i++ {
+	// 	fmt.Println(rand.Intn(max-min) + min)
+	// }
+	////////////////////////////////////
+	// nums := [6]int{0, 2, 1, 5, 3, 4}
+	// fmt.Println(buildArray(nums[:]))
 	///==========BYTE request
 	// data, err := os.ReadFile("./image.png")
 	// if err != nil {

@@ -28,6 +28,17 @@ type ListNode struct {
 	Next *ListNode
 }
 
+func buildArray(nums []int) []int {
+	var ans []int
+	fmt.Println(nums)
+	for i := 0; i < len(nums); i++ {
+		fmt.Println(nums[nums[i]], "i", i, nums[i])
+
+		ans = append(ans, nums[nums[i]])
+	}
+	return ans
+}
+
 func containsDuplicate(nums []int) bool {
 	fmt.Println(nums)
 	sort.Ints(nums)
