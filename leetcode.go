@@ -7,6 +7,45 @@ import (
 	"strings"
 )
 
+type NumArray struct {
+}
+
+func Constructor(nums []int) NumArray {
+	var sum []int
+
+	current := 0
+	for _, v := range nums {
+		current += v
+		sum = append(sum, current)
+	}
+	return NumArray{}
+}
+
+// func (this *NumArray) SumRange(left int, right int) int {
+
+// }
+
+/**
+ * Your NumArray object will be instantiated and called as such:
+ * obj := Constructor(nums);
+ * param_1 := obj.SumRange(left,right);
+ */
+
+func getConcatenation(nums []int) []int {
+	ans := nums
+
+	ans = append(ans, nums...)
+
+	return ans
+}
+
+func runningSum(nums []int) []int {
+	for i := 1; i < len(nums); i++ {
+		nums[i] += nums[i-1]
+	}
+	return nums
+}
+
 func romanToInt(s string) int {
 	var result int
 	// roman := map[string]int{

@@ -36,29 +36,57 @@ func (ir *IntRange) NextRandom(r *rand.Rand) int {
 	return r.Intn(ir.max-ir.min+1) + ir.min
 }
 
+func removeDuplicateStr(strSlice []string) []string {
+	allKeys := make(map[string]bool)
+	list := []string{}
+	for _, item := range strSlice {
+		if _, value := allKeys[item]; !value {
+			allKeys[item] = true
+			list = append(list, item)
+		}
+	}
+	return list
+}
+
 func RangeInt(n int) []string {
-	var arr []string
-	stiker := []string{
-		"22",
-		"11",
-		"33",
-		"44",
-		"55",
-		"66",
-		"32",
-		"56",
-		"77",
-		"88",
-		"99",
-		"10",
+	var res []string
+	// rr := map[int]string{}
+	var done []string
+	theBoys := []string{
+		"rakhotep",
+		"Randomllll",
+		"Magauiya00",
+		"drinksu",
+		"Tima_b",
+		"ganikazbek",
+		"MarkusDosmagambetov",
+		"Sakenever",
+		"askarbai1",
+		"azimkhankuat",
+		"Baglan2",
+		"rayodelsol01",
+		"AzamatBK4",
+		"ykabylbekov",
+		"adilbekov23",
+		"nurik_yes",
+		"yerlawkaa",
+		"CTZNF1",
+		"OPTIMUS_GANK",
+		"Bakbergen_M",
+		"Deus_loVult7",
+		"jc1an",
+		"runreyvo",
 	}
 
 	var r int
 	for r = 0; r <= n-1; r++ {
 		// arr[r] = rand.Intn(max) + min
-		arr = append(arr, stiker[rand.Intn(len(stiker))])
+		done = append(done, theBoys[rand.Intn(len(theBoys))])
 	}
-	return arr
+	res = removeDuplicateStr(done)
+
+	// fmt.Println(CheckDuplicate(done))
+	return res
 }
 
 // rand.Seed(time.Now().UnixNano())
@@ -68,8 +96,17 @@ func RangeInt(n int) []string {
 
 func main() {
 	rand.Seed(time.Now().UnixNano())
+	// for _, v := range RangeInt(4) {
+	// 	fmt.Println(v)
+	// }
+	// fmt.Println(RangeInt(5))
+	fmt.Println(RangeInt(5))
 
-	fmt.Println(RangeInt(4))
+	// a := 10.0
+	// b := 35.0
+	// r := b / a
+	// fmt.Println(math.Ceil(r))
+
 	//////////////////////////////////
 	// r := rand.New(rand.NewSource(4))
 	// ir := IntRange{1, 20}
