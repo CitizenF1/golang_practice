@@ -7,6 +7,43 @@ import (
 	"strings"
 )
 
+func minPartitions(n string) int {
+	res := 0
+	for _, v := range n {
+		ch, _ := strconv.Atoi(string(v))
+		if ch > res {
+			res = ch
+		}
+	}
+	return res
+}
+
+func minPartitionsSol(n string) int {
+
+	max := 0
+
+	for i, _ := range n {
+		if max < int(n[i]-'0') {
+			max = int(n[i] - '0')
+		}
+	}
+
+	return max
+}
+
+func finalValueAfterOperations(operations []string) int {
+	count := 0
+	for _, v := range operations {
+		if v == "++X" || v == "X++" {
+			count++
+		}
+		if v == "--X" || v == "X--" {
+			count--
+		}
+	}
+	return count
+}
+
 type NumArray struct {
 }
 
