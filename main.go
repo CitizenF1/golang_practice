@@ -9,7 +9,6 @@ import (
 	"path/filepath"
 	"strconv"
 	"sync"
-	"time"
 )
 
 type Storage struct {
@@ -48,10 +47,11 @@ func removeDuplicateStr(strSlice []string) []string {
 	return list
 }
 
-func RangeInt(n int) []string {
+func RangeInt(n int) string {
 	var res []string
 	// rr := map[int]string{}
 	var done []string
+
 	theBoys := []string{
 		"rakhotep",
 		"Randomllll",
@@ -76,17 +76,39 @@ func RangeInt(n int) []string {
 		"Deus_loVult7",
 		"jc1an",
 		"runreyvo",
+		"Kaleeeeeeb",
+		"mrsdrd",
 	}
-
 	var r int
 	for r = 0; r <= n-1; r++ {
 		// arr[r] = rand.Intn(max) + min
 		done = append(done, theBoys[rand.Intn(len(theBoys))])
 	}
 	res = removeDuplicateStr(done)
-
+	result := getNonVoted(theBoys, res)
 	// fmt.Println(CheckDuplicate(done))
-	return res
+	return result
+}
+
+func getNonVoted(list1, list2 []string) string {
+	var nonDuty []string
+	for _, t := range list1 {
+		voted := false
+		for _, v := range list2 {
+			if t == v {
+				voted = true
+				break
+			}
+		}
+		if !voted {
+			nonDuty = append(nonDuty, t)
+		}
+	}
+	result := ""
+	for _, n := range nonDuty {
+		result += "|" + n + " "
+	}
+	return result
 }
 
 // rand.Seed(time.Now().UnixNano())
@@ -95,12 +117,14 @@ func RangeInt(n int) []string {
 // fmt.Println(rand.Intn(max-min) + min)
 
 func main() {
-	rand.Seed(time.Now().UnixNano())
+
+	fmt.Println(sortSentence("is2 sentence4 This1 a3"))
+	// rand.Seed(time.Now().UnixNano())
 	// for _, v := range RangeInt(4) {
 	// 	fmt.Println(v)
 	// }
 	// fmt.Println(RangeInt(5))
-	fmt.Println(RangeInt(5))
+	// fmt.Println(RangeInt(5))
 
 	// a := 10.0
 	// b := 35.0

@@ -7,6 +7,18 @@ import (
 	"strings"
 )
 
+func sortSentence(s string) string {
+	words := strings.Split(s, " ")
+	res := make([]string, len(words))
+
+	for i := 0; i < len(res); i++ {
+		res[words[i][len(words[i])-1]-'1'] = words[i][:len(words[i])-1]
+	}
+	fmt.Println(res)
+
+	return ""
+}
+
 func minPartitions(n string) int {
 	res := 0
 	for _, v := range n {
