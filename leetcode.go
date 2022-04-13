@@ -7,14 +7,41 @@ import (
 	"strings"
 )
 
+func numJewelsInStones(jewels string, stones string) int {
+	cnt := 0
+	jwl := make(map[byte]bool, len(jewels))
+	for i := 0; i < len(jewels); i++ {
+		jwl[jewels[i]] = true
+	}
+	for i := 0; i < len(stones); i++ {
+		if _, isExt := jwl[stones[i]]; isExt {
+			cnt++
+		}
+	}
+	return cnt
+}
+
+func shuffle(nums []int, n int) []int {
+	var ans = make([]int, len(nums))
+	j := 0
+	for i := 0; i < len(nums)/2; i++ {
+		ans[j] = nums[i]
+		ans[j+1] = nums[i+len(nums)/2]
+		j += 2
+	}
+	return ans
+}
+
 func sortSentence(s string) string {
 	words := strings.Split(s, " ")
 	res := make([]string, len(words))
 
 	for i := 0; i < len(res); i++ {
+		fmt.Println(i)
 		res[words[i][len(words[i])-1]-'1'] = words[i][:len(words[i])-1]
+		fmt.Println(res)
 	}
-	fmt.Println(res)
+	// fmt.Println(res)
 
 	return ""
 }

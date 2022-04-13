@@ -47,7 +47,7 @@ func removeDuplicateStr(strSlice []string) []string {
 	return list
 }
 
-func RangeInt(n int) string {
+func RangeInt(n int) []string {
 	var res []string
 	// rr := map[int]string{}
 	var done []string
@@ -79,18 +79,25 @@ func RangeInt(n int) string {
 		"Kaleeeeeeb",
 		"mrsdrd",
 	}
+
 	var r int
 	for r = 0; r <= n-1; r++ {
 		// arr[r] = rand.Intn(max) + min
 		done = append(done, theBoys[rand.Intn(len(theBoys))])
 	}
 	res = removeDuplicateStr(done)
-	result := getNonVoted(theBoys, res)
-	// fmt.Println(CheckDuplicate(done))
-	return result
+	// result := getNonVoted(theBoys, res)
+	// fmt.Println(removeDuplicateStr(done))
+
+	// rand.Seed(time.Now().UnixNano())
+	// p := rand.Perm(len(theBoys))
+	// for _, r := range p[:2] {
+	// 	fmt.Println(theBoys[r])
+	// }
+	return res
 }
 
-func getNonVoted(list1, list2 []string) string {
+func doneboys(list1, list2 []string) string {
 	var nonDuty []string
 	for _, t := range list1 {
 		voted := false
@@ -117,13 +124,14 @@ func getNonVoted(list1, list2 []string) string {
 // fmt.Println(rand.Intn(max-min) + min)
 
 func main() {
-
-	fmt.Println(sortSentence("is2 sentence4 This1 a3"))
+	nums := [6]int{2, 5, 1, 3, 4, 7}
+	fmt.Println(shuffle(nums[:], 3))
+	// fmt.Println(sortSentence("is2 sentence4 This1 a3"))
 	// rand.Seed(time.Now().UnixNano())
 	// for _, v := range RangeInt(4) {
 	// 	fmt.Println(v)
 	// }
-	// fmt.Println(RangeInt(5))
+	// fmt.Println(RangeInt(4))
 	// fmt.Println(RangeInt(5))
 
 	// a := 10.0
@@ -377,19 +385,19 @@ func (this *Storage) MoveFile(fileName string, oldPath string, newPath string) e
 	return nil
 }
 
-// func twoSum(nums []int, target int) []int {
-// 	mapNums := map[int]int{}
-// 	for i := range nums {
-// 		dif := target - nums[i]
-// 		val, isExist := mapNums[dif]
-// 		if isExist == true {
-// 			return []int{val, i}
-// 		} else {
-// 			mapNums[nums[i]] = 1
-// 		}
-// 	}
-// 	return nil
-// }
+func twoSum(nums []int, target int) []int {
+	mapNums := map[int]int{}
+	for i := range nums {
+		dif := target - nums[i]
+		val, isExist := mapNums[dif]
+		if isExist == true {
+			return []int{val, i}
+		} else {
+			mapNums[nums[i]] = 1
+		}
+	}
+	return nil
+}
 
 // type ListNode struct {
 // 	Val  int
