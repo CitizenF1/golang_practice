@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math"
 	"sort"
 	"strconv"
 	"strings"
@@ -19,6 +20,22 @@ func numJewelsInStones(jewels string, stones string) int {
 		}
 	}
 	return cnt
+}
+
+func average(salary []int) float64 {
+	t, m, M, l := 0, math.MaxInt, math.MinInt, 0
+	for _, s := range salary {
+		t += s
+		if s < m {
+			m = s
+		} // found new min
+		if M < s {
+			M = s
+		} // found new Max
+		l++
+	}
+	// fmt.Println(t, m, M, l)
+	return float64(t-(m+M)) / float64(l-2)
 }
 
 func shuffle(nums []int, n int) []int {
