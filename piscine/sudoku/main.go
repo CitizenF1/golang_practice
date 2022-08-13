@@ -10,7 +10,22 @@ func main() {
 	args := []string(os.Args[1:])
 
 	if isCorrect(args) {
-		// table := fillTable(args)
+		table := fillTable(args)
+		if isSolve(table) {
+			for i := 0; i < 9; i++ {
+				for j := 0; j < 9; j++ {
+					if j != 8 {
+						z01.PrintRune(rune(table[i][j]))
+						z01.PrintRune('\n')
+					} else {
+						z01.PrintRune(rune(table[i][j]))
+					}
+				}
+				z01.PrintRune(10)
+			}
+		} else {
+			printError()
+		}
 	}
 
 }
@@ -26,6 +41,15 @@ func isValid(table [9][9]rune, x, y int, currNum rune) bool {
 			return false
 		}
 	}
+	a, b := x/3, y/3
+
+	for i := 3 * a; i < 3*(a+1); i++ {
+		for j := 3 * b; j < 3*(b+1); j++ {
+			if currNum == table[j][i] {
+				return false
+			}
+		}
+	}
 	return true
 }
 
@@ -38,12 +62,18 @@ func isSolve(table [9][9]rune) bool {
 			if table[y][x] == '.' {
 				for r := '1'; r <= '9'; r++ {
 					if isValid(table, x, y, r) {
+						table[y][x] = r
+						if isSolve(table) {
+							return true
+						}
 					}
+					table[y][x] = '.'
 				}
+				return false
 			}
 		}
-
 	}
+	return false
 }
 
 func isEmpty(table [9][9]rune) bool {
