@@ -15,28 +15,30 @@ func main() {
 
 }
 
-func isValid(table [9][9]rune, x, y, z int) bool {
+func isValid(table [9][9]rune, x, y int, currNum rune) bool {
 	for i := 0; i < 9; i++ {
-		if z == table[i][x] {
+		if currNum == table[i][x] {
 			return false
 		}
 	}
 	for j := 0; j < 9; j++ {
-		if z == table[y][j] {
+		if currNum == table[y][j] {
 			return false
 		}
 	}
+	return true
 }
 
 func isSolve(table [9][9]rune) bool {
-	if !isDots() {
+	if !isEmpty(table) {
 		return true
 	}
-	for i := 0; i < 9; i++ {
-		for j := 0; j < 9; j++ {
-			if table[i][j] == '.' {
-				for y := '1'; y <= '9'; y++ {
-					if isValid()
+	for y := 0; y < 9; y++ {
+		for x := 0; x < 9; x++ {
+			if table[y][x] == '.' {
+				for r := '1'; r <= '9'; r++ {
+					if isValid(table, x, y, r) {
+					}
 				}
 			}
 		}
@@ -44,7 +46,7 @@ func isSolve(table [9][9]rune) bool {
 	}
 }
 
-func isDots(table [9][9]rune) bool {
+func isEmpty(table [9][9]rune) bool {
 	for i := 0; i < 9; i++ {
 		for j := 0; j < 9; j++ {
 			if table[i][j] == '.' {
