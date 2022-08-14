@@ -1,8 +1,6 @@
 package main
 
 import (
-	"fmt"
-	"homework/piscine"
 	"io/ioutil"
 	"log"
 	"math/rand"
@@ -130,7 +128,6 @@ func restoreString(s string, indices []int) string {
 }
 
 func main() {
-	fmt.Println(piscine.Capitalize("(j->|-Te{U9a)"))
 	// fmt.Println(piscine.TrimAtoi("sdx1-fa2W3s4"))
 	// var indices = []int{4, 5, 6, 7, 0, 2, 1, 3}
 	// s := "codeleet"
