@@ -15,7 +15,7 @@ func main() {
 			for i := 0; i < 9; i++ {
 				for j := 0; j < 9; j++ {
 					if j != 9 {
-						z01.PrintRune(rune(table[i][j]))
+						z01.PrintRune(table[i][j])
 						z01.PrintRune(' ')
 					}
 				}
@@ -29,10 +29,22 @@ func main() {
 	}
 }
 
-func isValid(table [9][9]rune, coll, row int, currNum rune) bool {
+func checkDuplicate(counter [10]int) bool {
+	for i, count := range counter {
+		if i == 0 {
+			continue
+		}
+		if count > 1 {
+			return true
+		}
+	}
+	return false
+}
+
+func isValid(table [9][9]rune, column, row int, currNum rune) bool {
 	// check coll
 	for i := 0; i < 9; i++ {
-		if currNum == table[i][coll] {
+		if currNum == table[i][column] {
 			return false
 		}
 	}
@@ -42,8 +54,30 @@ func isValid(table [9][9]rune, coll, row int, currNum rune) bool {
 			return false
 		}
 	}
+	for i := 0; i < 9; i++ {
+		counter := [10]int{}
+		for j := 0; j < 9; j++ {
+			if int(table[i][j])-'0' >= 1 {
+				counter[int(table[i][j]-'0')]++
+			}
+		}
+		if checkDuplicate(counter) {
+			return false
+		}
+	}
+	for i := 0; i < 9; i++ {
+		counter := [10]int{}
+		for j := 0; j < 9; j++ {
+			if int(table[j][i])-'0' >= 1 {
+				counter[int(table[j][i]-'0')]++
+			}
+		}
+		if checkDuplicate(counter) {
+			return false
+		}
+	}
 	// check square
-	a, b := coll/3, row/3
+	a, b := column/3, row/3
 	for i := 3 * a; i < 3*(a+1); i++ {
 		for j := 3 * b; j < 3*(b+1); j++ {
 			if currNum == table[j][i] {
@@ -59,17 +93,17 @@ func backtrack(table *[9][9]rune) bool {
 		return true
 	}
 	for row := 0; row < 9; row++ {
-		for coll := 0; coll < 9; coll++ {
-			if table[row][coll] == '.' {
+		for column := 0; column < 9; column++ {
+			if table[row][column] == '.' {
 				for r := '1'; r <= '9'; r++ {
 					// if cell == '.' try fill number 1 - 9 and backtrack
-					if isValid(*table, coll, row, r) {
-						table[row][coll] = r
+					if isValid(*table, column, row, r) {
+						table[row][column] = r
 						if backtrack(table) {
 							return true
 						}
 					}
-					table[row][coll] = '.'
+					table[row][column] = '.'
 				}
 				return false
 			}
@@ -90,6 +124,7 @@ func isEmpty(table *[9][9]rune) bool {
 }
 
 func isCorrect(args []string) bool {
+	count := 0
 	// check range
 	if len(args) != 9 {
 		return false
@@ -101,12 +136,15 @@ func isCorrect(args []string) bool {
 	}
 	for i := 0; i < len(args); i++ {
 		for j := 0; j < len(args[i]); j++ {
-			if args[i][j] <= 48 || args[i][j] > 57 && !(args[i][j] == '.') {
+			if args[i][j] != '.' {
+				count++
+			}
+			if (args[i][j] <= 48 || args[i][j] > 57) && !(args[i][j] == '.') {
 				return false
 			}
 		}
 	}
-	return true
+	return count >= 39
 }
 
 func printError() {
