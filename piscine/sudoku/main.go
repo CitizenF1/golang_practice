@@ -8,7 +8,9 @@ import (
 
 func main() {
 	args := []string(os.Args[1:])
-
+	if len(args) == 1 {
+		args = SplitWhiteSpaces(args[0])
+	}
 	if isCorrect(args) {
 		table := fillTable(args)
 		if backtrack(&table) {
@@ -21,6 +23,7 @@ func main() {
 				}
 				z01.PrintRune('\n')
 			}
+			z01.PrintRune('\n')
 		} else {
 			printError()
 		}
@@ -144,7 +147,8 @@ func isCorrect(args []string) bool {
 			}
 		}
 	}
-	return count >= 39
+	// fmt.Println(count)
+	return count >= 17
 }
 
 func printError() {
@@ -162,4 +166,23 @@ func fillTable(args []string) [9][9]rune {
 		}
 	}
 	return table
+}
+
+func SplitWhiteSpaces(s string) []string {
+	var res []string
+	word := ""
+	for i, v := range s {
+		if !isSeparate(v) {
+			word += string(v)
+		}
+		if isSeparate(v) && word != "" || len(s) == i+1 && word != "" {
+			res = append(res, word)
+			word = ""
+		}
+	}
+	return res
+}
+
+func isSeparate(r rune) bool {
+	return r == ' ' || r == '\n' || r == '\t'
 }
